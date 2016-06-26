@@ -11,7 +11,11 @@ gulp.task('get-matches', function (done) {
   var preferences = argv.preferences || ''
 
   if (typeof country !== 'undefined' && typeof geo !== 'undefined') {
-    console.log('OK')
+    main.getMatches(country, geo, gender, preferences).then(function (str) {
+      console.log(str.join('\n'))
+    }, function (err) {
+      console.error(err)
+    }).fin(done)
   } else {
     console.log('Missing parameters!')
     done()
